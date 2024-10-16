@@ -8,7 +8,17 @@ public sealed class Tests
         await Assert.That(() => Guard.ThrowIfNull((string?)null)).Throws<ArgumentNullException>();
         await Assert.That(() => Guard.ThrowIfNull("")).ThrowsNothing();
     }
-    
+
+    [Test]
+    public async Task Test_Is()
+    {
+        await Assert.That(() => Guard.Is<B>(new A())).Throws<InvalidCastException>();
+        await Assert.That(() => Guard.Is<A>(new A())).ThrowsNothing();
+        await Assert.That(() => Guard.Is<A>(new B())).ThrowsNothing();
+        await Assert.That(() => Guard.Is<A>(new C())).Throws<InvalidCastException>();
+        await Assert.That(() => Guard.Is<A>(null)).Throws<ArgumentNullException>();
+    }
+
     [Test]
     public async Task Test_ThrowIfNullOrEmpty()
     {   
@@ -26,3 +36,8 @@ public sealed class Tests
         await Assert.That(() => Guard.ThrowIfNullOrWhiteSpace("hello world")).ThrowsNothing();
     }
 }
+
+
+file record A;
+file record B : A;
+file record C;
