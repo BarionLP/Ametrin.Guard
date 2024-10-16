@@ -11,7 +11,7 @@ public static class Guard
 
     [StackTraceHidden]
     public static T Is<T>(object? value, [CallerArgumentExpression(nameof(value))] string expression = "") 
-        => value is null ? throw new ArgumentNullException(expression) : value is T t ? t : throw new InvalidCastException($"Cannot cast {value.GetType().FullName} to {typeof(T).FullName}");
+        => value is null ? throw new ArgumentNullException(expression) : value is T t ? t : throw new InvalidCastException($"Unable to cast object of type '{value.GetType().FullName}' to type '{typeof(T).FullName}'");
 
     [StackTraceHidden]
     public static T ThrowIfNullOrEmpty<T>(T? collection, [CallerArgumentExpression(nameof(collection))] string expression = "") where T : System.Collections.IEnumerable
