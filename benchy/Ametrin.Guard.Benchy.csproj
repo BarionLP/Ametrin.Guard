@@ -11,4 +11,8 @@
     <ProjectReference Include="..\src\Ametrin.Guard.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="0.14.0" />
+  </ItemGroup>
+
 </Project>
