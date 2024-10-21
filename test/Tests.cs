@@ -21,12 +21,12 @@ public sealed class Tests
 
     [Test]
     public async Task Test_ThrowIfNullOrEmpty()
-    {   
+    {
         await Assert.That(() => Guard.ThrowIfNullOrEmpty(null)).Throws<ArgumentNullException>();
         await Assert.That(() => Guard.ThrowIfNullOrEmpty("")).Throws<ArgumentNullException>();
         await Assert.That(() => Guard.ThrowIfNullOrEmpty(" ")).ThrowsNothing();
     }
-    
+
     [Test]
     public async Task Test_ThrowIfNullOrWhiteSpace()
     {
@@ -34,6 +34,15 @@ public sealed class Tests
         await Assert.That(() => Guard.ThrowIfNullOrWhiteSpace("")).Throws<ArgumentNullException>();
         await Assert.That(() => Guard.ThrowIfNullOrWhiteSpace("   ")).Throws<ArgumentNullException>();
         await Assert.That(() => Guard.ThrowIfNullOrWhiteSpace("hello world")).ThrowsNothing();
+    }
+
+    [Test]
+    public async Task Test_InRange()
+    {
+        await Assert.That(() => Guard.InRange(0, 0, 2)).ThrowsNothing();
+        await Assert.That(() => Guard.InRange(1, 0, 2)).ThrowsNothing();
+        await Assert.That(() => Guard.InRange(2, 0, 2)).ThrowsNothing();
+        await Assert.That(() => Guard.InRange(3, 0, 2)).Throws<ArgumentOutOfRangeException>();
     }
 }
 
